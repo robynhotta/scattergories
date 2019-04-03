@@ -52,6 +52,10 @@ app.get("/register", function(req, res){
     res.render("register");
 });
 
+app.get("/games/all", function(req, res) {
+    res.render("index")
+})
+
 //INDEX ROUTE
 app.get("/games", function(req, res){
     Game.find({}, function(err, allGames){
@@ -82,7 +86,7 @@ app.post("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
-            res.json({success: true});
+            res.redirect("/games/all");
         }
     });
 });
