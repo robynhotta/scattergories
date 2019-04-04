@@ -62,7 +62,7 @@ app.get("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
-            res.render("new", {games: allGames});
+            res.render("index", {games: allGames});
         }
     });
 });
@@ -95,8 +95,19 @@ app.post("/games", function(req, res){
 // app.get("/games/new", middleware.isLoggedIn, function(req, res){
 //     res.render("new");
 // });
-app.get("/games/complete", function(req, res){
-    res.render("index");
+app.get("/games/new", function(req, res){
+    res.render("new");
+});
+
+//SHOW ROUTE
+app.get("/games/:id", function(req, res){
+    Game.findById(req.params.id).exec(function(err, foundGame){
+        if(err || !foundGame){
+            res.redirect("index");
+        } else {
+            res.render("show", {game: foundGame});
+        }
+    });
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
