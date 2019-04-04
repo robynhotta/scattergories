@@ -52,9 +52,9 @@ app.get("/register", function(req, res){
     res.render("register");
 });
 
-app.get("/games/all", function(req, res) {
-    res.render("index")
-})
+app.get("/games/complete", function(req, res) {
+    res.render("index");
+});
 
 //INDEX ROUTE
 app.get("/games", function(req, res){
@@ -62,7 +62,7 @@ app.get("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
-            res.render("/games", {games: allGames});
+            res.render("new", {games: allGames});
         }
     });
 });
@@ -86,7 +86,7 @@ app.post("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
-            res.redirect("/games/all");
+            res.redirect("/games/complete");
         }
     });
 });
@@ -95,8 +95,8 @@ app.post("/games", function(req, res){
 // app.get("/games/new", middleware.isLoggedIn, function(req, res){
 //     res.render("new");
 // });
-app.get("/games/new", function(req, res){
-    res.render("new");
+app.get("/games/complete", function(req, res){
+    res.render("index");
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
