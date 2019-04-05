@@ -67,10 +67,6 @@ app.get("/register", function(req, res){
     res.render("register");
 });
 
-// app.get("/games", function(req, res) {
-//     res.render("index");
-// });
-
 //INDEX ROUTE
 app.get("/games", function(req, res){
     Game.find({}, function(err, allGames){
