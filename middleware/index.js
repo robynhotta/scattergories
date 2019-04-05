@@ -48,7 +48,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    req.flash("error", "Please login to play your game");
+    req.flash("error", "Please login to play your");
     res.redirect("/login");
 };
 

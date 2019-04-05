@@ -4,15 +4,14 @@
 
 	<button id="letterbtn">Generate Letter</button>
 	<button id="resetbtn">New Game</button>
-	<button id="pastbtn">View Past Games</button>
 
 	<h4>Fill in the categories with words that begin with the generated letter as fast as you can!</h4>
 	
 
 	<span id="finalscore"></span>
 
-	<form action="/games/<%=games._id%>" method="POST">
-		<input type="submit" id="submit">SUBMIT!</input>
+	<form action="/games" method="POST">
+		<input type="submit" id="submit"></input>
 		<div class="form-group">
 			<label>Fruit or Vegetable</label>
 			<input type="text" name="fruit" placeholder="Enter answer here!">

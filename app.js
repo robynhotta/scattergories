@@ -40,6 +40,21 @@ var gameSchema = new mongoose.Schema({
 
 var Game = mongoose.model("Game", gameSchema);
 
+// var games = [
+//     {fruit: "rutabaga",
+//     movie: "runaway bride",
+//     city: "russell",
+//     colour: "red",
+//     restaurant: "remezzos",
+//     app: "ruler",
+//     harry: "raveclaw",
+//     alcohol: "red label",
+//     book: "rappers eating kale",
+//     clothing: "rack holder",
+//     beach: "rocks",
+//     name: "robert"}
+// ];
+
 app.get("/", function(req, res){
     res.redirect("/games/new");
 });
@@ -52,9 +67,9 @@ app.get("/register", function(req, res){
     res.render("register");
 });
 
-app.get("/games/complete", function(req, res) {
-    res.render("index");
-});
+// app.get("/games", function(req, res) {
+//     res.render("index");
+// });
 
 //INDEX ROUTE
 app.get("/games", function(req, res){
@@ -62,6 +77,7 @@ app.get("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
+            console.log("games", allGames);
             res.render("index", {games: allGames});
         }
     });
@@ -81,12 +97,12 @@ app.post("/games", function(req, res){
     var clothing = req.body.clothing;
     var beach = req.body.beach;
     var name = req.body.name;
-    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name};
+    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name}
     Game.create(newGame, function(err, newlyCreated){
         if(err){
-            console.log("error");
+            console.log(err);
         } else {
-            res.redirect("/games/complete");
+            res.redirect("/games");
         }
     });
 });
@@ -101,7 +117,7 @@ app.get("/games/new", function(req, res){
 
 //SHOW ROUTE
 app.get("/games/:id", function(req, res){
-    Game.findById(req.params.id).exec(function(err, foundGame){
+    Game.findById(req.params.id, function(err, foundGame){
         if(err || !foundGame){
             res.redirect("index");
         } else {
