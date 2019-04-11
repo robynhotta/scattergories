@@ -1,0 +1,37 @@
+.form-group {
+    margin: 0.3rem;
+}
+
+body {
+    margin-left: 2rem;
+}
+
+#mini-header {
+    font-size: 15px;
+    margin-top: 8px;
+}
+
+.nav-link {
+    font-family: "Pacifico";
+    color: #dc3545;
+}
+
+#new-header {
+    font-size: 33px;
+}
+
+/*.nav.justify-content-end {*/
+/*    margin-bottom: 0;*/
+/*}*/
+
+label {
+    font-family: "Pacifico";
+}
+
+h1 {
+    font-family: "Pacifico";
+}
+
+.reg-title {
+    margin-bottom: 1rem;
+}

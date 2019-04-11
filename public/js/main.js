@@ -5,7 +5,7 @@ var letterbtn = document.getElementById("letterbtn");
 var resetbtn = document.getElementById("resetbtn");
 var letterDisplay = document.getElementById("letterDisplay");
 var form = document.getElementsByClassName("box");
-var scoreDisplay = document.getElementById("finalScore");
+var scoreDisplay = document.getElementById("scoreDisplay");
 var finalScore = 0;
 
 if(letterbtn){

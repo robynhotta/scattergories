@@ -1,65 +1,63 @@
 <% include ./partials/header %>
 
-	<h1>Think of words that begin with <span id="letterDisplay"></span>!</h1>
-
-	<button id="letterbtn">Generate Letter</button>
-	<input id="resetbtn" type="button" value="New Game">
-
-	<h4>Fill in the categories with words that begin with the generated letter as fast as you can!</h4>
+	<h1 id="new-header">Think of words that begin with <span id="letterDisplay"></span>!</h1>
+	<h4 id="mini-header">Fill in the categories with words that begin with the generated letter as fast as you can!</h4>
 	
+	<button id="letterbtn" class="btn btn-outline-danger btn-sm">Generate Letter</button>
+	<input id="resetbtn" type="button" value="New Game" class="btn btn-outline-danger btn-sm">
 
 	<span id="finalscore"></span>
 
 	<form id="theForm" action="/games" method="POST">
-		<input type="submit" id="submit" onclick="scoring()"></input>
+		<input type="submit" id="submit" onclick="scoring()" class="btn btn-danger btn-sm"></input>
 		<div class="form-group">
 			<label>Fruit or Vegetable</label>
-			<input class="box" type="text" name="fruit" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="fruit" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Movie Title</label>
-			<input class="box" type="text" name="movie" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="movie" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		
 		</div>
 		<div class="form-group">
 			<label>City</label>
-			<input class="box" type="text" name="city" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="city" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Colour</label>
-			<input class="box" type="text" name="colour" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="colour" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Restaurant</label>
-			<input class="box" type="text" name="restaurant" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="restaurant" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>App</label>
-			<input class="box" type="text" name="app" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="app" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Harry Potter Reference</label>
-			<input class="box" type="text" name="harry" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="harry" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Brand of Alcohol</label>
-			<input class="box" type="text" name="alcohol" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="alcohol" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Book Title</label>
-			<input class="box" type="text" name="book" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="book" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Article of Clothing</label>
-			<input class="box" type="text" name="clothing" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="clothing" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Something you'd find at the beach</label>
-			<input class="box" type="text" name="beach" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{2,}">
+			<input class="box" type="text" name="beach" placeholder="Enter answer here!" pattern=".{0}|.{2,}">
 		</div>
 		<div class="form-group">
 			<label>Name that has more than 5 letters</label>
-			<input class="box" type="text" name="name" placeholder="Enter answer here!" pattern="[<%=randomLetter%>].{0}|.{6,}">
+			<input class="box" type="text" name="name" placeholder="Enter answer here!" pattern=".{0}|.{6,}">
 		</div>		
 	</form>
 
