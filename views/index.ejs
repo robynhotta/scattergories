@@ -1,69 +1,32 @@
 <% include ./partials/header %>
 
-	<button id="resetbtn">New Game</button>
-	<button id="pastbtn">View Past Games</button>
+	<a href="/games/new" class="btn btn-danger">New Game</a>
 
-	<h4>Game Complete! Review Your Answers Below</h4>
-	<button id="submit">SUBMIT!</button>
+	<h3>Game Complete! Review Your Answers Below</h3>
+	<h4 id="showScore">Your score was: <span id="scoreDisplay"></span>/12!</h4>
 
-	<span id="finalscore"></span>
+<div class="d-inline-flex flex-row">
+	<div>
+		<% games.forEach(function(game){ %>
+			<div class="col-md-3">
+				<div class="thumbnail">
+					<h4>Fruit or Vegetable: <%= game.fruit %></h4>
+					<h4>Movie Title: <%= game.movie %></h4>
+					<h4>City: <%= game.city %></h4>
+					<h4>Colour: <%= game.colour %></h4>
+					<h4>Restaurant: <%= game.restaurant %></h4>
+					<h4>App: <%= game.app %></h4>
+					<h4>Harry Potter Reference: <%= game.harry %></h4>
+					<h4>Brand of Alcohol: <%= game.alcohol %></h4>
+					<h4>Book Title: <%= game.book %></h4>
+					<h4>Article of Clothing: <%= game.clothing %></h4>
+					<h4>Something you'd find at the beach: <%= game.beach %></h4>
+					<h4>Name that has more than 5 letters: <%= game.name %></h4>
+				</div>
+			</div>
+		<% }); %>
+	</div>
+</div>
 
-<!--<div class="container">-->
-<!--    <label>Fruit or Vegetable</label>-->
-<!--    <h4><%= game.fruit %></h4>-->
-<!--</div>-->
-
-	<form>
-		<div class="form-group">
-			<label>Fruit or Vegetable</label>
-			<h4><%= game.fruit %></h4>
-			<input type="text" name="game[fruit]" value="<%= game.fruit %>">
-		</div>
-		<div class="form-group">
-			<label>Movie Title</label>
-			<input type="text" name="game[movie]" value="<%= game.movie %>">
-		
-		</div>
-		<div class="form-group">
-			<label>City</label>
-			<input type="text" name="game[city]" value="<%= game.city %>">
-		</div>
-		<div class="form-group">
-			<label>Colour</label>
-			<input type="text" name="game[colour]" value="<%= game.colour %>">
-		</div>
-		<div class="form-group">
-			<label>Restaurant</label>
-			<input type="text" name="game[restaurant]" value="<%= game.restaurant %>">
-		</div>
-		<div class="form-group">
-			<label>App</label>
-			<input type="text" name="game[app]" value="<%= game.app %>">
-		</div>
-		<div class="form-group">
-			<label>Harry Potter Reference</label>
-			<input type="text" name="game[harry]" value="<%= game.harry %>">
-		</div>
-		<div class="form-group">
-			<label>Brand of Alcohol</label>
-			<input type="text" name="game[alcohol]" value="<%= game.alcohol %>">
-		</div>
-		<div class="form-group">
-			<label>Book Title</label>
-			<input type="text" name="game[book]" value="<%= game.book %>">
-		</div>
-		<div class="form-group">
-			<label>Article of Clothing</label>
-			<input type="text" name="game[clothing]" value="<%= game.clothing %>">
-		</div>
-		<div class="form-group">
-			<label>Something you'd find at the beach</label>
-			<input type="text" name="game[beach]" value="<%= game.beach %>">
-		</div>
-		<div class="form-group">
-			<label>Name that has more than 5 letters</label>
-			<input type="text" name="game[name]" value="<%= game.name %>">
-		</div>		
-	</form>
 
 <% include ./partials/footer %>

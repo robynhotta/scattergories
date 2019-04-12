@@ -7,7 +7,8 @@ var express             = require("express"),
     mongoose            = require("mongoose"),
     methodOverride      = require("method-override"),
     expressSanitizer    = require("express-sanitizer"),
-    middleware          = require("./middleware");
+    middleware          = require("./middleware"),
+    User                = require("./models/user");
     
 mongoose.connect("mongodb://localhost:27017/Scattergories", { useNewUrlParser: true });
 app.set("view engine", "ejs");
@@ -22,6 +23,18 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
 
 var gameSchema = new mongoose.Schema({
     fruit: String,
@@ -44,24 +57,13 @@ app.get("/", function(req, res){
     res.redirect("/games/new");
 });
 
-app.get("/login", function(req, res){
-    res.render("login");
-});
-
-app.get("/register", function(req, res){
-    res.render("register");
-});
-
-app.get("/games/complete", function(req, res) {
-    res.render("index");
-});
-
 //INDEX ROUTE
 app.get("/games", function(req, res){
     Game.find({}, function(err, allGames){
         if(err){
             console.log("error");
         } else {
+            console.log("games", allGames);
             res.render("index", {games: allGames});
         }
     });
@@ -81,33 +83,71 @@ app.post("/games", function(req, res){
     var clothing = req.body.clothing;
     var beach = req.body.beach;
     var name = req.body.name;
-    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name};
+    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name}
     Game.create(newGame, function(err, newlyCreated){
         if(err){
-            console.log("error");
+            console.log(err);
         } else {
-            res.redirect("/games/complete");
+            res.redirect("/games");
         }
     });
 });
 
 //NEW ROUTE
-// app.get("/games/new", middleware.isLoggedIn, function(req, res){
-//     res.render("new");
-// });
-app.get("/games/new", function(req, res){
+app.get("/games/new", middleware.isLoggedIn, function(req, res){
     res.render("new");
 });
+// app.get("/games/new", function(req, res){
+//     res.render("new");
+// });
 
 //SHOW ROUTE
 app.get("/games/:id", function(req, res){
-    Game.findById(req.params.id).exec(function(err, foundGame){
+    Game.findById(req.params.id, function(err, foundGame){
         if(err || !foundGame){
             res.redirect("index");
         } else {
             res.render("show", {game: foundGame});
         }
     });
+});
+
+//AUTH ROUTES
+
+//show register route
+app.get("/register", function(req, res){
+    res.render("register");
+});
+//handle sign up logic
+app.post("/register", function(req, res){
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/games/new");
+        });
+    });
+});
+
+//login route
+app.get("/login", function(req, res){
+    res.render("login");
+});
+//login logic
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/games/new",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+//logout route
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/login");
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){

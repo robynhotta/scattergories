@@ -11,21 +11,25 @@
 		crossorigin="anonymous"
 	>
     <link rel="stylesheet" href="/stylesheets/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 
 </head>
 
     <body>
     	<nav class="nav justify-content-end">
+		<% if(!currentUser){ %>
 		  <li class="nav-item">
 		    <a class="nav-link" href="/login">Login</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="/register">Sign Up</a>
 		  </li>
+		<% } else { %>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Now Playing As </a>
+		    <a class="nav-link" href="#">Now Playing As <%= currentUser.username %></a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Log Out</a>
+		    <a class="nav-link" href="/logout">Log Out</a>
 		  </li>
+		<% } %>
 		</nav>
