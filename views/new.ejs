@@ -2,11 +2,9 @@
 
 	<h1 id="new-header">Think of words that begin with <span id="letterDisplay"></span>!</h1>
 	<h4 id="mini-header">Fill in the categories with words that begin with the generated letter as fast as you can!</h4>
-	
+
 	<button id="letterbtn" class="btn btn-outline-danger btn-sm">Generate Letter</button>
 	<input id="resetbtn" type="button" value="New Game" class="btn btn-outline-danger btn-sm">
-
-	<span id="finalscore"></span>
 
 	<form id="theForm" action="/games" method="POST">
 		<input type="submit" id="submit" onclick="scoring()" class="btn btn-danger btn-sm"></input>

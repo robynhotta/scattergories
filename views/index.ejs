@@ -2,36 +2,31 @@
 
 	<a href="/games/new" class="btn btn-danger">New Game</a>
 
-	<h4>Game Complete! Review Your Answers Below</h4>
-	<h4>Your score was: <span id="scoreDisplay"></span>/12!</h4>
+	<h3>Game Complete! Review Your Answers Below</h3>
+	<h4 id="showScore">Your score was: <span id="scoreDisplay"></span>/12!</h4>
 
-<% games.forEach(function(game){ %>
-	<div class="container">
-		<label>Fruit or Vegetable</label>
-		<h4><%= game.fruit %></h4>
-		<label>Movie Title</label>
-		<h4><%= game.movie %></h4>
-		<label>City</label>
-		<h4><%= game.city %></h4>
-		<label>Colour</label>
-		<h4><%= game.colour %></h4>
-		<label>Restaurant</label>
-		<h4><%= game.restaurant %></h4>
-		<label>App</label>
-		<h4><%= game.app %></h4>
-		<label>Harry Potter Reference</label>
-		<h4><%= game.harry %></h4>
-		<label>Brand of Alcohol</label>
-		<h4><%= game.alcohol %></h4>
-		<label>Book Title</label>
-		<h4><%= game.book %></h4>
-		<label>Article of Clothing</label>
-		<h4><%= game.clothing %></h4>
-		<label>Something you'd find at the beach</label>
-		<h4><%= game.beach %></h4>
-		<label>Name that has more than 5 letters</label>
-		<h4><%= game.name %></h4>
+<div class="d-inline-flex flex-row">
+	<div>
+		<% games.forEach(function(game){ %>
+			<div class="col-md-3">
+				<div class="thumbnail">
+					<h4>Fruit or Vegetable: <%= game.fruit %></h4>
+					<h4>Movie Title: <%= game.movie %></h4>
+					<h4>City: <%= game.city %></h4>
+					<h4>Colour: <%= game.colour %></h4>
+					<h4>Restaurant: <%= game.restaurant %></h4>
+					<h4>App: <%= game.app %></h4>
+					<h4>Harry Potter Reference: <%= game.harry %></h4>
+					<h4>Brand of Alcohol: <%= game.alcohol %></h4>
+					<h4>Book Title: <%= game.book %></h4>
+					<h4>Article of Clothing: <%= game.clothing %></h4>
+					<h4>Something you'd find at the beach: <%= game.beach %></h4>
+					<h4>Name that has more than 5 letters: <%= game.name %></h4>
+				</div>
+			</div>
+		<% }); %>
 	</div>
-<% }); %>
+</div>
+
 
 <% include ./partials/footer %>

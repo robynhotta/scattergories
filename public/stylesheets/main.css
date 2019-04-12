@@ -32,6 +32,36 @@ h1 {
     font-family: "Pacifico";
 }
 
+h3 {
+    font-family: "Pacifico";
+}
+
+button {
+    font-family: "Pacifico";
+    margin-top: 5px;
+}
+
+a {
+    font-family: "Pacifico";
+}
+
+h4 {
+    font-size: 15px;
+    margin-bottom: 0.3rem;
+}
+
 .reg-title {
     margin-bottom: 1rem;
+}
+
+.container {
+    margin: 0px;
+}
+
+.col-md-3 {
+    max-width: 100%;
+}
+
+#showScore {
+    font-size: 20px;
 }

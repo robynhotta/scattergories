@@ -18,6 +18,11 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(flash());
 
+app.use(require("express-session")({
+    secret: "There is a remote on the table.",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
@@ -30,12 +35,6 @@ app.use(function(req, res, next){
     res.locals.success = req.flash("success");
     next();
 });
-
-app.use(require("express-session")({
-    secret: "There is a remote on the table.",
-    resave: false,
-    saveUninitialized: false
-}));
 
 var gameSchema = new mongoose.Schema({
     fruit: String,
@@ -56,14 +55,6 @@ var Game = mongoose.model("Game", gameSchema);
 
 app.get("/", function(req, res){
     res.redirect("/games/new");
-});
-
-app.get("/login", function(req, res){
-    res.render("login");
-});
-
-app.get("/register", function(req, res){
-    res.render("register");
 });
 
 //INDEX ROUTE
@@ -103,12 +94,12 @@ app.post("/games", function(req, res){
 });
 
 //NEW ROUTE
-// app.get("/games/new", middleware.isLoggedIn, function(req, res){
-//     res.render("new");
-// });
-app.get("/games/new", function(req, res){
+app.get("/games/new", middleware.isLoggedIn, function(req, res){
     res.render("new");
 });
+// app.get("/games/new", function(req, res){
+//     res.render("new");
+// });
 
 //SHOW ROUTE
 app.get("/games/:id", function(req, res){
@@ -119,6 +110,44 @@ app.get("/games/:id", function(req, res){
             res.render("show", {game: foundGame});
         }
     });
+});
+
+//AUTH ROUTES
+
+//show register route
+app.get("/register", function(req, res){
+    res.render("register");
+});
+//handle sign up logic
+app.post("/register", function(req, res){
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/games/new");
+        });
+    });
+});
+
+//login route
+app.get("/login", function(req, res){
+    res.render("login");
+});
+//login logic
+app.post("/login", passport.authenticate("local",
+    {
+        successRedirect: "/games/new",
+        failureRedirect: "/login"
+    }), function(req, res){
+});
+
+//logout route
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/login");
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
