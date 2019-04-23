@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 
-	<a href="/games/new" class="btn btn-danger">New Game</a>
+	<a href="/games/new" class="btn">New Game</a>
 
 	<h3>Game Complete! Review Your Answers Below</h3>
 
@@ -8,23 +8,23 @@
 		<% games.forEach(function(game){ %>
 			<div id="views" class="col-md-3">
 				<div class="thumbnail">
-					<h4>FINAL SCORE: <%= game.score %>/12</h4>
-					<h4>Fruit or Vegetable: <%= game.fruit %></h4>
-					<h4>Movie Title: <%= game.movie %></h4>
-					<h4>City: <%= game.city %></h4>
-					<h4>Colour: <%= game.colour %></h4>
-					<h4>Restaurant: <%= game.restaurant %></h4>
-					<h4>App: <%= game.app %></h4>
-					<h4>Harry Potter Reference: <%= game.harry %></h4>
-					<h4>Brand of Alcohol: <%= game.alcohol %></h4>
-					<h4>Book Title: <%= game.book %></h4>
-					<h4>Article of Clothing: <%= game.clothing %></h4>
-					<h4>Something you'd find at the beach: <%= game.beach %></h4>
-					<h4>Name that has more than 5 letters: <%= game.name %></h4>
+					<h4><span>FINAL SCORE: </span><%= game.score %>/12</h4>
+					<h4><span>Fruit or Vegetable: </span><%= game.fruit %></h4>
+					<h4><span>Movie Title: </span><%= game.movie %></h4>
+					<h4><span>City: </span><%= game.city %></h4>
+					<h4><span>Colour: </span><%= game.colour %></h4>
+					<h4><span>Restaurant: </span><%= game.restaurant %></h4>
+					<h4><span>App: </span><%= game.app %></h4>
+					<h4><span>Harry Potter Reference: </span><%= game.harry %></h4>
+					<h4><span>Brand of Alcohol: </span><%= game.alcohol %></h4>
+					<h4><span>Book Title: </span><%= game.book %></h4>
+					<h4><span>Article of Clothing: </span><%= game.clothing %></h4>
+					<h4><span>Something you'd find at the beach: </span><%= game.beach %></h4>
+					<h4><span>Name that has more than 5 letters: </span><%= game.name %></h4>
+					<h4><span>Game played by: </span><%= currentUser.username %></h4>
 				</div>
 			</div>
 		<% }); %>
 </div>
-
 
 <% include ./partials/footer %>

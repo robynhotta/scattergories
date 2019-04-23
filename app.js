@@ -101,12 +101,10 @@ app.post("/games", function(req, res){
         }
     var gameScore = scoring(gameValues);
     newGame.score = gameScore;
-    console.log(newGame);
     Game.create(newGame, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
-            console.log(newlyCreated);
             res.redirect("/games");
         }
     });
