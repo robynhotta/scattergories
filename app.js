@@ -9,6 +9,7 @@ var express             = require("express"),
     expressSanitizer    = require("express-sanitizer"),
     middleware          = require("./middleware"),
     User                = require("./models/user");
+require("./polyfill");
     
 mongoose.connect("mongodb://localhost:27017/Scattergories", { useNewUrlParser: true });
 app.set("view engine", "ejs");
@@ -49,6 +50,7 @@ var gameSchema = new mongoose.Schema({
     clothing: String,
     beach: String,
     name: String,
+    score: Number
 });
 
 var Game = mongoose.model("Game", gameSchema);
@@ -63,7 +65,6 @@ app.get("/games", function(req, res){
         if(err){
             console.log("error");
         } else {
-            console.log("games", allGames);
             res.render("index", {games: allGames});
         }
     });
@@ -83,11 +84,29 @@ app.post("/games", function(req, res){
     var clothing = req.body.clothing;
     var beach = req.body.beach;
     var name = req.body.name;
-    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name}
+    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name};
+    
+    var gameValues = Object.keys(newGame).map(function(key) {
+        return newGame[key];
+    });
+    
+    function scoring(gameValues) { //Function doesn't return the score, it manipulates an existing value which is not what we want (Craig can explaain why)
+        var finalScore = 0;
+            for(var i = 0; i < gameValues.length; i++){
+                if(!gameValues[i] == ""){
+                    finalScore += 1;
+                }
+            }
+            return finalScore;
+        }
+    var gameScore = scoring(gameValues);
+    newGame.score = gameScore;
+    console.log(newGame);
     Game.create(newGame, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
+            console.log(newlyCreated);
             res.redirect("/games");
         }
     });

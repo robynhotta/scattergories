@@ -3,13 +3,12 @@
 	<a href="/games/new" class="btn btn-danger">New Game</a>
 
 	<h3>Game Complete! Review Your Answers Below</h3>
-	<h4 id="showScore">Your score was: <span id="scoreDisplay"></span>/12!</h4>
 
-<div class="d-inline-flex flex-row">
-	<div>
+<div class="d-inline-flex flex-row flex-wrap">
 		<% games.forEach(function(game){ %>
-			<div class="col-md-3">
+			<div id="views" class="col-md-3">
 				<div class="thumbnail">
+					<h4>FINAL SCORE: <%= game.score %>/12</h4>
 					<h4>Fruit or Vegetable: <%= game.fruit %></h4>
 					<h4>Movie Title: <%= game.movie %></h4>
 					<h4>City: <%= game.city %></h4>
@@ -25,7 +24,6 @@
 				</div>
 			</div>
 		<% }); %>
-	</div>
 </div>
 
 

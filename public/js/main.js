@@ -1,6 +1,4 @@
 console.log("HIOIIIOOO");
-var letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'W'];
-var randomLetter = letterArray[Math.floor(Math.random() * letterArray.length)];
 var letterbtn = document.getElementById("letterbtn");
 var resetbtn = document.getElementById("resetbtn");
 var letterDisplay = document.getElementById("letterDisplay");
@@ -8,12 +6,17 @@ var form = document.getElementsByClassName("box");
 var scoreDisplay = document.getElementById("scoreDisplay");
 var finalScore = 0;
 
+function getRandomLetter() {
+    var letterArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'W'];
+   return letterArray[Math.floor(Math.random() * letterArray.length)];
+}
+
 if(letterbtn){
     letterbtn.addEventListener("click", updateLetter);
 }
 
 function updateLetter() {
-        letterDisplay.textContent = randomLetter;
+        letterDisplay.textContent = getRandomLetter();
 }
 
 if(resetbtn){
@@ -21,21 +24,19 @@ if(resetbtn){
 }
 
 function reset() {
-    letterDisplay.value = randomLetter;
+    updateLetter();
     for(var i = 0; i < form.length; i++){
         form[i].value = "";
     }
 
 }
 
-function scoring() {
-    //for each box, if it is filled, add 1 to finalScore, but if it is empty, subtract 1 to finalScore
-    form.forEach(function(){
-        if(form.value == ""){
-            finalScore--;
-        } else {
-            finalScore++;
-        }
-    scoreDisplay.textContent = finalScore;
-    });
-}
+// function scoring() {
+//     for(var i = 0; i < form.length; i++){
+//         if(!form.value == ""){
+//             finalScore++;
+//         }
+//     }
+// }
+
+
