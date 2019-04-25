@@ -5,9 +5,10 @@
 	<h3>Game Complete! Review Your Answers Below</h3>
 
 <div class="d-inline-flex flex-row flex-wrap">
-		<% games.forEach(function(game){ %>
+		<% games.reverse().forEach(function(game){ %>
 			<div id="views" class="col-md-3">
 				<div class="thumbnail">
+					<h4><span>Game Played with letter: <%= game.letter %></span></h4>
 					<h4><span>FINAL SCORE: </span><%= game.score %>/12</h4>
 					<h4><span>Fruit or Vegetable: </span><%= game.fruit %></h4>
 					<h4><span>Movie Title: </span><%= game.movie %></h4>

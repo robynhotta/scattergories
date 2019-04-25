@@ -50,10 +50,13 @@ var gameSchema = new mongoose.Schema({
     clothing: String,
     beach: String,
     name: String,
-    score: Number
+    score: Number,
+    letter: String,
 });
 
 var Game = mongoose.model("Game", gameSchema);
+
+
 
 app.get("/", function(req, res){
     res.redirect("/games/new");
@@ -85,15 +88,16 @@ app.post("/games", function(req, res){
     var beach = req.body.beach;
     var name = req.body.name;
     var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name};
-    
+    var letter = req.body.letter;
+    console.log(letter + " is the letter");
     var gameValues = Object.keys(newGame).map(function(key) {
         return newGame[key];
     });
     
-    function scoring(gameValues) { //Function doesn't return the score, it manipulates an existing value which is not what we want (Craig can explaain why)
+    function scoring(gameValues) {
         var finalScore = 0;
             for(var i = 0; i < gameValues.length; i++){
-                if(!gameValues[i] == ""){
+                if(!gameValues[i] == "" && gameValues[i].charAt(0) === letter){
                     finalScore += 1;
                 }
             }
