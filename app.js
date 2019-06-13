@@ -87,8 +87,8 @@ app.post("/games", function(req, res){
     var clothing = req.body.clothing;
     var beach = req.body.beach;
     var name = req.body.name;
-    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name};
     var letter = req.body.letter;
+    var newGame = {fruit: fruit, movie: movie, city: city, colour: colour, restaurant: restaurant, app: app, harry: harry, alcohol: alcohol, book: book, clothing: clothing, beach: beach, name: name, letter: letter};
     console.log(letter + " is the letter");
     var gameValues = Object.keys(newGame).map(function(key) {
         return newGame[key];
